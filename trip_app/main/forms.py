@@ -80,15 +80,15 @@ class CreateTripForm(forms.ModelForm):
 
     class Meta:
         model = Trip
-        exclude = ('review', 'user', )
-        # fields = ('starting_point', 'destination', 'distance', 'vehicle', 'driver')
-        # widgets = {
-        #     'name': forms.TextInput(
-        #         attrs={
-        #             'placeholder': 'Enter pet name',
-        #         }
-        #     ),
-        # }
+        # exclude = ('review', 'user', )
+        fields = ('start_date', 'end_date', 'starting_point', 'destination', 'distance', 'number_of_passengers', 'vehicle', 'driver')
+        widgets = {
+            'starting_point': forms.TextInput(
+                # attrs={
+                #     'placeholder': 'Enter pet name',
+                # }
+            ), 'destination': forms.TextInput()
+        }
 
 
 class CreateDriverForm(forms.ModelForm):

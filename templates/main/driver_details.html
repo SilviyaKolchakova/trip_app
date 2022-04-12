@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block page_content %}
-{% if user.is_superuser %}
+{% if user.is_superuser or user.is_staff %}
     <h5></h5><a href="{% url 'create driver' %}" class="btn btn-primary">Add new driver</a>
     {% endif %}
 <div class="row">
@@ -15,13 +15,20 @@
     <img src="{{ driver.picture.url }}" class="card-img-top">
 <p class="text">License category: {{ driver.license_category }}</p>
 <p class="text">Driving experience: {{ driver.years_experience }} years</p>
+       </div>
         </div>
-        </div>
-        </div>
-{% if user.is_superuser %}
+
+
+    {% if user.is_superuser %}
     <h5></h5><a href="{% url 'edit driver' driver.pk %}" class="btn btn-primary">Edit driver</a>
     <h5></h5><a href="{% url 'delete driver' driver.pk %}" class="btn btn-primary">Delete driver</a>
     {% endif %}
+        {% if user.is_staff %}
+    <h5></h5><a href="{% url 'edit driver' driver.pk %}" class="btn btn-primary">Edit driver</a>
+    {% endif %}
+        </div>
+        </div>
+
     {% endfor %}
 
 {% endblock %}

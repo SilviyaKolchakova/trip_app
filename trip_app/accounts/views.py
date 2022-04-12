@@ -58,6 +58,10 @@ class ProfileDetailsView(views.DetailView):
         return context
 
 
+class ChangeUserPasswordView(auth_views.PasswordChangeView):
+    template_name = 'accounts/change_password.html'
+
+
 class UserLogoutView(auth_views.LogoutView):
     template_name = 'accounts/logout_page.html'
 

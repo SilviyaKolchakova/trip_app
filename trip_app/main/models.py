@@ -6,7 +6,8 @@ from django.core.validators import MinLengthValidator
 from django.db import models
 from django.contrib.auth import forms
 
-from trip_app.common.validators import validate_only_letters
+from trip_app.common.validators import validate_only_letters, validate_min_distance, \
+    validate_min_price_per_km
 
 UserModel = get_user_model()
 
@@ -63,7 +64,11 @@ class Vehicle(models.Model):
 
     price_per_km = models.DecimalField(
         max_digits=6,
-        decimal_places=2)
+        decimal_places=2,
+        validators=(
+            validate_min_price_per_km,
+        )
+    )
 
     def __str__(self):
         return f'{self.type}'
@@ -187,7 +192,7 @@ class Trip(models.Model):
         )
     )
 
-    starting_point = models.CharField(
+    starting_point = models.TextField(
         max_length=STARTING_POINT_MAX_LENGTH,
         validators=(
             MinLengthValidator(STARTING_POINT_MIN_LENGTH),
@@ -195,7 +200,7 @@ class Trip(models.Model):
         )
     )
 
-    destination = models.CharField(
+    destination = models.TextField(
         max_length=DESTINATION_MAX_LENGTH,
         validators=(
             MinLengthValidator(DESTINATION_MIN_LENGTH),
@@ -205,6 +210,9 @@ class Trip(models.Model):
 
     distance = models.IntegerField(
         default=0,
+        validators=(
+            validate_min_distance,
+        )
     )
 
     number_of_passengers = models.IntegerField(

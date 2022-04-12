@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block page_content %}
-{% if user.is_superuser %}
+{% if user.is_superuser or user.is_staff %}
     <h4></h4><a href="{% url 'create vehicle' %}" class="btn btn-primary">Add new vehicle</a>
     {% endif %}
 <div class="row">
@@ -20,6 +20,9 @@
         {% if user.is_superuser %}
     <h5></h5><a href="{% url 'edit vehicle' vehicle.pk %}" class="btn btn-primary">Edit vehicle</a>
     <h5></h5><a href="{% url 'delete vehicle' vehicle.pk %}" class="btn btn-primary">Delete vehicle</a>
+    {% endif %}
+{% if user.is_staff %}
+    <h5></h5><a href="{% url 'edit vehicle' vehicle.pk %}" class="btn btn-primary">Edit vehicle</a>
     {% endif %}
 </div>
   </div>
