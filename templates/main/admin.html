@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block page_content %}
+<table>
+    <tr>
+        <th>Creation date</th>
+        <br>
+        <th>Trip</th>
+        <th>User</th>
+    </tr>
+    {% for trip in object_list %}
+    <tr>
+        <td>{{ trip.publication_date}}</td>
+        <td><a href="{% url 'trip details' trip.pk %}" class="btn btn-primary">See all details</a></td>
+    <td>{{ trip.user.profile}}</td>
+
+
+    </tr>
+    {% endfor %}
+</table>
+
+
+<h3></h3>Popular trips <a href="{% url 'create popular trip' %}" class="btn btn-primary">Add new</a>?
+
+
+{% endblock %}

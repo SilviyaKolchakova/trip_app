@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block page_content %}
+
+<h4></h4> <img src="{% static 'bf0bcb59ab934ed4b117a404f939c5d2.png' %}" height="120px" class="text-capitalize">WELCOME TO TRIP PLANNER</h4>
+{#    <img src="{% static 'bf0bcb59ab934ed4b117a404f939c5d2.png' %}" height="70px" />#}
+<h6 class="card-box">POPULAR TRIPS</h6>
+
+    {% for trip in popular_trips %}
+
+        <div class="col-lg-2">
+        <h6 class="card-title">{{ trip.popular_trip_name }}</h6>
+    <h6><img src="{{ trip.popular_trip_photo.url }}" class="card-img-top" alt=""></h6>
+        </div>
+    {% endfor %}
+
+{#    <div class="row">#}
+
+
+    <h6 class="text">You want to try our Trip Planner opportunities?</h6>
+    <h6><a   href="{% url 'register' %}" class="btn btn-link">Join here</a>
+            <h6 class="text">Already a member?</h6>
+                </h6><a href="{% url 'login user' %}" class="btn btn-link">Sign in</a>
+
+
+
+
+{% endblock %}

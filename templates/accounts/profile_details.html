@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block page_content %}
+<head>
+    <meta charset="UTF-8">
+    <title>{{ profile }}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% if is_owner %}
+    <h5></h5><a href="{% url 'edit profile' user.pk %}" class="btn btn-primary">Edit profile</a>
+    <h5></h5><a href="{% url 'delete profile' user.pk %}" class="btn btn-primary">Delete profile</a>
+    {% endif %}
+</head>
+<body>
+
+</body>
+
+
+{% endblock %}

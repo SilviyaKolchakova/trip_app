@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block page_content %}
+
+
+<div class="container-fluid">
+{% if object_list %}
+     <h3>My trips:</h3>
+{% for trip in object_list %}
+{% if trip.user == request.user  %}
+
+    <h5>Trip to: {{ trip.destination }} from {{ trip.start_date }} to {{ trip.end_date }}</h5>
+        <h5></h5><a  href="{% url 'trip details' trip.pk %}" class="btn btn-primary">See all details</a>
+
+{% endif %}
+
+{% endfor %}
+    <h3></h3><a href="{% url 'create trip' %}" class="btn btn-primary">Book your next trip</a>
+{% else %}
+    <h3></h3><a href="{% url 'create trip' %}" class="btn btn-primary">Book a trip</a>
+{% endif %}
+
+<h3></h3>You are currently logged in. Would you like to <a href="{% url 'logout user' %}" class="btn btn-primary">logout</a>?
+
+</div>
+{% endblock %}

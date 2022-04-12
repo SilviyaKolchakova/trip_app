@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block page_content %}
+{% if user.is_superuser %}
+    <h4></h4><a href="{% url 'create vehicle' %}" class="btn btn-primary">Add new vehicle</a>
+    {% endif %}
+<div class="row">
+<h3 class="card-box">Our vehicles</h3>
+<div class="col-sm-4">
+
+    {% for vehicle in vehicles %}
+<div class="card">
+<div class="card-body">
+
+<h5 class="card-title">Type: {{ vehicle.type }}</h5>
+    <img src="{{ vehicle.photo.url }}" class="card-img-top">
+<h5 class="text">Registration date: {{ vehicle.date_of_registration}}</h5>
+<h5 class="text">Number of seats: {{ vehicle.number_of_seats}}</h5>
+<h5 class="text">Price bgn: {{ vehicle.price_per_km}} per km</h5>
+
+        {% if user.is_superuser %}
+    <h5></h5><a href="{% url 'edit vehicle' vehicle.pk %}" class="btn btn-primary">Edit vehicle</a>
+    <h5></h5><a href="{% url 'delete vehicle' vehicle.pk %}" class="btn btn-primary">Delete vehicle</a>
+    {% endif %}
+</div>
+  </div>
+
+    {% endfor %}
+
+
+{% endblock %}

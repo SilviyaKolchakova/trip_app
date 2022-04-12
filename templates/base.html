@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<!-- Navigation Bar -->
+
+    <nav class="navbar navbar-expand-sm navbar-light bg-light">
+      <a class="navbar-brand" href="{% url 'dashboard' %}">Home</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'driver details' %}">Drivers</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'vehicle details' %}">Vehicles</a>
+          </li>
+          <li class="nav-item">
+              {% if request.user.is_authenticated %}
+            <a class="nav-link" href="{% url 'profile details' request.user.pk %}">My profile</a>
+              {% endif %}
+          <li class="nav-item">
+           {% if request.user.is_staff or request.user.is_superuser %}
+            <a class="nav-link" href="{% url 'admin_view' %}">Admin</a>
+              {% endif %}
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <!-- End Navigation Bar -->
+<head>
+    <meta charset="UTF-8">
+    <title>Trip planner</title>
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+
+
+<div class="container">
+    {% block page_content %}
+    {% endblock %}
+</div>
+
+{% block bottom_page_content %}
+{% endblock %}
+
+<!-- Page Footer -->
+<footer class="fixed-bottom card-footer pt-0 mt-5 ">
+    <div>@2022  Python Web Framework Course at SoftUni</div>
+    <div>Silviya Kolchakova - Individual project</div>
+</footer>
+<!-- End Page Footer -->
