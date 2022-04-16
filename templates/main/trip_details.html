@@ -3,6 +3,7 @@
 <div class="row">
 <div class="card">
 <div class="card-body">
+{% if is_owner or request.user.is_staff or request.user.is_superuser %}
 <h4 class="card-title">Trip to {{ trip.destination }}</h4>
 <div class="col-sm-4">
 <h5 class="text">My driver: {{ trip.driver.first_name }}</h5>
@@ -12,18 +13,19 @@
     <h5 class="text">Trip cost: total km {{ trip.distance }} * {{ trip.vehicle.price_per_km}} = {{ trip_cost }}</h5>
     <h5 class="text">Driver payment: {{ driver_payment }}</h5>
     <h5 class="text">Final cost: {{ total_trip_cost }}</h5>
+{% endif %}
     <div class="row">
         <div class="col-lg-1"></div>
         <div class="col-lg-2">
         </div>
-            {% if request.user.is_owner and days_before_trip > 5 %}
+            {% if is_owner and days_before_trip > 5 %}
                 <h5></h5><a href="{% url 'edit trip' trip.pk %}" class="btn btn-primary">Change trip details</a>
 
                 <h5></h5><a href="{% url 'delete trip' trip.pk %}" class="btn btn-primary">Cancel the trip</a>
             {% endif %}
-        {% if request.user.is_staff %}
-                <h5></h5><a href="{% url 'edit trip' trip.pk %}" class="btn btn-primary">Change trip details</a>
-            {% endif %}
+{#        {% if request.user.is_staff %}#}
+{#                <h5></h5><a href="{% url 'edit trip' trip.pk %}" class="btn btn-primary">Change trip details</a>#}
+{#            {% endif %}#}
         {% if request.user.is_superuser%}
             <h5></h5><a href="{% url 'edit trip' trip.pk %}" class="btn btn-primary">Change trip details</a>
                 <h5></h5><a href="{% url 'delete trip' trip.pk %}" class="btn btn-primary">Cancel the trip</a>
@@ -31,9 +33,12 @@
             {% if is_owner and review %}
             <h5></h5><a href="{% url 'review details' review.pk %}" class="btn btn-primary">See trip review</a>
             {% endif %}
+
         </div>
     </div>
+
         <div class="col-lg-3"></div>
+
     </div>
   </div>
 </div>

@@ -21,9 +21,9 @@
     <h5></h5><a href="{% url 'edit vehicle' vehicle.pk %}" class="btn btn-primary">Edit vehicle</a>
     <h5></h5><a href="{% url 'delete vehicle' vehicle.pk %}" class="btn btn-primary">Delete vehicle</a>
     {% endif %}
-{% if user.is_staff %}
-    <h5></h5><a href="{% url 'edit vehicle' vehicle.pk %}" class="btn btn-primary">Edit vehicle</a>
-    {% endif %}
+{#{% if user.is_staff %}#}
+{#    <h5></h5><a href="{% url 'edit vehicle' vehicle.pk %}" class="btn btn-primary">Edit vehicle</a>#}
+{#    {% endif %}#}
 </div>
   </div>
 

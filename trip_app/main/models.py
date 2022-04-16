@@ -56,9 +56,6 @@ class Vehicle(models.Model):
     photo = models.ImageField(
         validators=(
             # validate_file_max_size_in_mb(5),
-            # validate_file_max_size_in_mb(7),
-            # validate_file_max_size_in_mb(8),
-
         ),upload_to='vehicles',
     )
 
@@ -104,8 +101,6 @@ class Driver(models.Model):
     picture = models.ImageField(
         validators=(
             # validate_file_max_size_in_mb(5),
-            # validate_file_max_size_in_mb(7),
-            # validate_file_max_size_in_mb(8),
         ), upload_to='drivers',
     )
 
@@ -151,13 +146,7 @@ class Review(models.Model):
         blank=True,
     )
 
-    trip_photo = models.URLField(
-        validators=(
-            # validate_file_max_size_in_mb(5),
-            # validate_file_max_size_in_mb(7),
-            # validate_file_max_size_in_mb(8),
-        )
-    )
+    trip_photo = models.URLField()
 
     trip_rate = models.CharField(
         max_length=max(len(x) for (x, _) in TRIP_RATE),
@@ -196,7 +185,7 @@ class Trip(models.Model):
         max_length=STARTING_POINT_MAX_LENGTH,
         validators=(
             MinLengthValidator(STARTING_POINT_MIN_LENGTH),
-            validate_only_letters,
+            # validate_only_letters,
         )
     )
 
@@ -204,7 +193,7 @@ class Trip(models.Model):
         max_length=DESTINATION_MAX_LENGTH,
         validators=(
             MinLengthValidator(DESTINATION_MIN_LENGTH),
-            validate_only_letters,
+            # validate_only_letters,
         )
     )
 
@@ -241,13 +230,9 @@ class Trip(models.Model):
 
 
 class TripPhoto(models.Model):
-    photo = models.URLField(
-        validators=(
-            # validate_file_max_size_in_mb(5),
-            # validate_file_max_size_in_mb(7),
-            # validate_file_max_size_in_mb(8),
-        )
-    )
+    photo = models.URLField()
+
+
     description = models.TextField(
         null=True,
         blank=True,
@@ -259,7 +244,6 @@ class TripPhoto(models.Model):
 
     tagged_trip = models.ManyToManyField(
         Trip,
-        # validate at least 1 pet
     )
 
     user = models.ForeignKey(
@@ -278,7 +262,7 @@ class PopularTrip(models.Model):
     popular_trip_photo = models.ImageField(
         validators=(
             # validate_file_max_size_in_mb(5),
-            # validate_file_max_size_in_mb(7),
-            # validate_file_max_size_in_mb(8),
         ), upload_to='popular_trips',
     )
+
+

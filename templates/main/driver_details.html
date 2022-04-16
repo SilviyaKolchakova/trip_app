@@ -23,9 +23,9 @@
     <h5></h5><a href="{% url 'edit driver' driver.pk %}" class="btn btn-primary">Edit driver</a>
     <h5></h5><a href="{% url 'delete driver' driver.pk %}" class="btn btn-primary">Delete driver</a>
     {% endif %}
-        {% if user.is_staff %}
-    <h5></h5><a href="{% url 'edit driver' driver.pk %}" class="btn btn-primary">Edit driver</a>
-    {% endif %}
+{#        {% if has_perm %}#}
+{#    <h5></h5><a href="{% url 'edit driver' driver.pk %}" class="btn btn-primary">Edit driver</a>#}
+{#    {% endif %}#}
         </div>
         </div>
 

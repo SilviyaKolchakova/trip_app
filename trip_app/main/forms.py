@@ -80,8 +80,8 @@ class CreateTripForm(forms.ModelForm):
 
     class Meta:
         model = Trip
-        # exclude = ('review', 'user', )
-        fields = ('start_date', 'end_date', 'starting_point', 'destination', 'distance', 'number_of_passengers', 'vehicle', 'driver')
+        exclude = ('review', 'user', 'review' )
+        # fields = ('start_date', 'end_date', 'starting_point', 'destination', 'distance', 'number_of_passengers', 'vehicle', 'driver')
         widgets = {
             'starting_point': forms.TextInput(
                 # attrs={

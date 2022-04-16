@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block page_content %}
+    {% if trips %}
 <table>
     <tr>
         <th>Creation date</th>
@@ -7,6 +8,7 @@
         <th>Trip</th>
         <th>User</th>
     </tr>
+{% endif %}
     {% for trip in object_list %}
     <tr>
         <td>{{ trip.publication_date}}</td>

@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.urls import reverse_lazy
 from django.views import generic as views
 
@@ -24,22 +25,38 @@ class CreateDriverView(views.CreateView):
     form_class = CreateDriverForm
     success_url = reverse_lazy('driver details')
 
+
+    # def dispatch(self, request, *args, **kwargs):
+    #     if not self.user.has_permission():
+    #         pass
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
         kwargs['user'] = self.request.user
         return kwargs
 
 
-class EditDriverView(views.UpdateView):
+class UserAccessToDriverMixin(PermissionRequiredMixin):
+    def dispatch(self, request, *args, **kwargs):
+        if not self.user.has_permission():
+            pass
+
+
+class EditDriverView(PermissionRequiredMixin, views.UpdateView):
+
+    permission_required = 'main.driver.change_driver'
+
     model = Driver
     template_name = 'main/driver_edit.html'
     fields = '__all__'
+
+
 
     def get_success_url(self):
         return reverse_lazy('driver details')
 
 
-class DeleteDriverView(views.DeleteView):
+class DeleteDriverView(PermissionRequiredMixin, views.DeleteView):
+    permission_required = 'driver.delete_driver'
     model = Driver
     template_name = 'main/driver_delete.html'
     fields = '__all__'
